@@ -23,7 +23,7 @@ public class BendWater : MonoBehaviour
     {
         if (other.gameObject.CompareTag("MoveableWater"))
         {
-            if (Input.GetKeyDown(KeyCode.Space) && cooldown <= 0f)
+            if (Input.GetKeyDown(KeyCode.Q) && cooldown <= 0f)
             {
                 // trigger it
                 if (other.gameObject.GetComponent<MoveableWater>().NeedsToFlood())
