@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 585f0656fb4351d42a6b6785f0fb9628
+guid: d781f5e3d1dd1bf41abb6b12dc143ec2
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -94,11 +94,11 @@ ModelImporter:
     100176: Cloak2:pCylinder1
     100178: Controls
     100180: Cube
-    100182: //RootNode
-    100184: Hair:Group32770
-    100186: Hair:Group48950
-    100188: Joints
-    100190: L_Dagger
+    100182: Hair:Group32770
+    100184: Hair:Group48950
+    100186: Joints
+    100188: L_Dagger
+    100190: //RootNode
     100192: Mesh
     100194: pCube1
     100196: pCube1 1
@@ -107,9 +107,10 @@ ModelImporter:
     100202: pCube3
     100204: pCube3 1
     100206: pCylinder1
-    100208: pSphere1
-    100210: pSphere1 1
-    100212: R_Dagger
+    100208: pCylinder2
+    100210: pSphere1
+    100212: pSphere1 1
+    100214: R_Dagger
     400000: Body2:Group2
     400002: Character
     400004: Character1_Ctrl_ChestEndEffector
@@ -201,11 +202,11 @@ ModelImporter:
     400176: Cloak2:pCylinder1
     400178: Controls
     400180: Cube
-    400182: //RootNode
-    400184: Hair:Group32770
-    400186: Hair:Group48950
-    400188: Joints
-    400190: L_Dagger
+    400182: Hair:Group32770
+    400184: Hair:Group48950
+    400186: Joints
+    400188: L_Dagger
+    400190: //RootNode
     400192: Mesh
     400194: pCube1
     400196: pCube1 1
@@ -214,9 +215,10 @@ ModelImporter:
     400202: pCube3
     400204: pCube3 1
     400206: pCylinder1
-    400208: pSphere1
-    400210: pSphere1 1
-    400212: R_Dagger
+    400208: pCylinder2
+    400210: pSphere1
+    400212: pSphere1 1
+    400214: R_Dagger
     2100000: lambert1
     2100002: lambert3
     2100004: lambert2
@@ -230,30 +232,33 @@ ModelImporter:
     2300006: pCube2 1
     2300008: pCube3
     2300010: pCube3 1
-    2300012: pSphere1
-    2300014: pSphere1 1
+    2300012: pCylinder2
+    2300014: pSphere1
+    2300016: pSphere1 1
     3300000: pCube1
     3300002: pCube1 1
     3300004: pCube2
     3300006: pCube2 1
     3300008: pCube3
     3300010: pCube3 1
-    3300012: pSphere1
-    3300014: pSphere1 1
+    3300012: pCylinder2
+    3300014: pSphere1
+    3300016: pSphere1 1
     4300000: Cube
     4300002: pCylinder1
     4300004: Body2:Group2
     4300006: Cloak2:pCylinder1
     4300008: Hair:Group48950
     4300010: Hair:Group32770
-    4300012: pCube1
-    4300014: pCube2
-    4300016: pCube3
-    4300018: pSphere1
-    4300020: pCube1
-    4300022: pCube2
-    4300024: pCube3
-    4300026: pSphere1
+    4300012: pCylinder2
+    4300014: pCube1
+    4300016: pCube2
+    4300018: pCube3
+    4300020: pSphere1
+    4300022: pCube1
+    4300024: pCube2
+    4300026: pCube3
+    4300028: pSphere1
     7400000: Idle
     9500000: //RootNode
     13700000: Body2:Group2
@@ -600,13 +605,13 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Fey_Idle(Clone)
+    - name: LF_Idle(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character
-      parentName: Fey_Idle(Clone)
+      parentName: LF_Idle(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 1, y: 1, z: 1}
@@ -623,7 +628,7 @@ ModelImporter:
     - name: Character1_Ctrl_ChestEndEffector
       parentName: Character1_Ctrl_Reference
       position: {x: 0.000000166893, y: 1.7603498, z: 0.08188942}
-      rotation: {x: 0.085069306, y: 9.565731e-11, z: 0.0000000011203868, w: 0.9963751}
+      rotation: {x: 0.085069306, y: 9.56573e-11, z: 0.0000000011203869, w: 0.9963751}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_ChestOriginEffector
       parentName: Character1_Ctrl_Reference
@@ -633,7 +638,7 @@ ModelImporter:
     - name: Character1_Ctrl_HeadEffector
       parentName: Character1_Ctrl_Reference
       position: {x: 0.007085258, y: 2.3580854, z: 0.209453}
-      rotation: {x: 0.0738564, y: -0.00035362953, z: -0.0002000052, w: 0.9972688}
+      rotation: {x: 0.073856406, y: -0.00035362956, z: -0.00020000522, w: 0.9972688}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_Hips
       parentName: Character1_Ctrl_Reference
@@ -693,7 +698,7 @@ ModelImporter:
     - name: Character1_Ctrl_LeftShoulder
       parentName: Character1_Ctrl_Spine1
       position: {x: -0.105000004, y: 0.21382827, z: 0}
-      rotation: {x: 0, y: -0, z: -1.7347236e-17, w: 1}
+      rotation: {x: 0, y: -0, z: -2.7755576e-17, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_LeftArm
       parentName: Character1_Ctrl_LeftShoulder
@@ -795,7 +800,7 @@ ModelImporter:
     - name: Character1_Ctrl_HipsEffector
       parentName: Character1_Ctrl_Reference
       position: {x: 0.00000030517577, y: 0.9234187, z: 0.010851836}
-      rotation: {x: 0.022794198, y: -1.2088195e-11, z: 5.301813e-10, w: 0.9997402}
+      rotation: {x: 0.022794196, y: -1.2088194e-11, z: 5.301813e-10, w: 0.9997402}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_LeftAnkleEffector
       parentName: Character1_Ctrl_Reference
@@ -810,7 +815,7 @@ ModelImporter:
     - name: Character1_Ctrl_LeftFootEffector
       parentName: Character1_Ctrl_Reference
       position: {x: -0.29836044, y: 0.0406836, z: 0.1323747}
-      rotation: {x: -0.001800969, y: -0.054051243, z: -0.0062293746, w: 0.99851716}
+      rotation: {x: -0.0018009691, y: -0.054051243, z: -0.0062293746, w: 0.99851716}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_LeftHandIndexEffector
       parentName: Character1_Ctrl_Reference
@@ -825,7 +830,7 @@ ModelImporter:
     - name: Character1_Ctrl_LeftHipEffector
       parentName: Character1_Ctrl_Reference
       position: {x: -0.21682964, y: 0.92341894, z: 0.010851847}
-      rotation: {x: -0.038284928, y: 0.0030260303, z: -0.0017141844, w: 0.99926084}
+      rotation: {x: -0.03828493, y: 0.0030260307, z: -0.0017141844, w: 0.99926084}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_LeftKneeEffector
       parentName: Character1_Ctrl_Reference
@@ -835,7 +840,7 @@ ModelImporter:
     - name: Character1_Ctrl_LeftShoulderEffector
       parentName: Character1_Ctrl_Reference
       position: {x: -0.28786877, y: 1.7511739, z: 0.0803111}
-      rotation: {x: 0.18403761, y: -0.14235976, z: 0.4830951, w: 0.84408706}
+      rotation: {x: 0.1840376, y: -0.1423598, z: 0.4830951, w: 0.84408706}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_LeftWristEffector
       parentName: Character1_Ctrl_Reference
@@ -870,12 +875,12 @@ ModelImporter:
     - name: Character1_Ctrl_RightHipEffector
       parentName: Character1_Ctrl_Reference
       position: {x: 0.21683025, y: 0.9234184, z: 0.010851824}
-      rotation: {x: -0.12613109, y: -0.0076320297, z: -0.0075017107, w: 0.9919559}
+      rotation: {x: -0.12613107, y: -0.007632029, z: -0.0075017107, w: 0.9919559}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_RightKneeEffector
       parentName: Character1_Ctrl_Reference
       position: {x: 0.24709338, y: 0.5167897, z: 0.11641871}
-      rotation: {x: 0.0575966, y: 0.08491629, z: 0.011910773, w: 0.9946507}
+      rotation: {x: 0.057596605, y: 0.08491629, z: 0.011910774, w: 0.9946507}
       scale: {x: 1, y: 1, z: 1}
     - name: Character1_Ctrl_RightShoulderEffector
       parentName: Character1_Ctrl_Reference
@@ -887,6 +892,11 @@ ModelImporter:
       position: {x: 0.58841145, y: 1.1603947, z: 0.062431544}
       rotation: {x: 0.01028117, y: -0.2945911, z: -0.5077405, w: 0.80951226}
       scale: {x: 1, y: 1, z: 1}
+    - name: pCylinder2
+      parentName: Character1_Ctrl_RightWristEffector
+      position: {x: 0.16775931, y: 0.22679663, z: 0.48012984}
+      rotation: {x: 0.46364784, y: 0.5353799, z: 0.24073347, w: 0.6636614}
+      scale: {x: 2.7172656, y: 144.84451, z: 2.7172656}
     - name: Joints
       parentName: Character
       position: {x: -0, y: 0, z: 0}
@@ -1056,12 +1066,12 @@ ModelImporter:
       scale: {x: 0.9999999, y: 1.000001, z: 1.0000008}
     - name: Character1_RightFoot
       parentName: Character1_RightLeg
-      position: {x: 0.000000054293736, y: 0.38577425, z: 0.000000048938922}
+      position: {x: 0.000000055891636, y: 0.38577425, z: 0.000000058274857}
       rotation: {x: -0, y: 2.6645353e-15, z: 0.0000000039592853, w: 1}
       scale: {x: 1.0000002, y: 0.99999994, z: 1}
     - name: Character1_RightToeBase
       parentName: Character1_RightFoot
-      position: {x: 0.010546984, y: 0.09393441, z: -0.19432104}
+      position: {x: 0.010546987, y: 0.09393441, z: -0.19432102}
       rotation: {x: 0.000000001583718, y: 0.0000000126697115, z: -0.0000000015837165,
         w: 1}
       scale: {x: 1.0000002, y: 1, z: 1}
@@ -1101,7 +1111,7 @@ ModelImporter:
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 0.61927503, y: 1.1605468, z: 1.0949619}
     - name: L_Dagger
-      parentName: Fey_Idle(Clone)
+      parentName: LF_Idle(Clone)
       position: {x: -0.06486999, y: 1.5349046, z: -0.32235393}
       rotation: {x: 0.0706337, y: 0.99409544, z: 0.08065703, w: -0.016721888}
       scale: {x: 1, y: 1, z: 1}
@@ -1126,7 +1136,7 @@ ModelImporter:
       rotation: {x: 0, y: -0, z: -0, w: 1}
       scale: {x: 2.4692984, y: 2.4692984, z: 2.4692984}
     - name: R_Dagger
-      parentName: Fey_Idle(Clone)
+      parentName: LF_Idle(Clone)
       position: {x: 0.11439727, y: 1.5449731, z: -0.3168023}
       rotation: {x: 0.16216485, y: -0.06821721, z: 0.08069819, w: 0.9810896}
       scale: {x: 1, y: 1, z: 1}

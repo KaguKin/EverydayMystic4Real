@@ -41,7 +41,7 @@ public class CrabController : MonoBehaviour, IAIController {
 		if(dist < 10 && !inCombat)
         {
             EnableCombat();
-            player.GetComponent<PlayerMovement>().enemies.Add(this.gameObject);
+            player.GetComponent<CombatController>().enemies.Add(this.gameObject);
         }else if(dist > 10 && inCombat)
         {
             //player.GetComponent<PlayerMovement>().TakeFromEnemies(gameObject);
@@ -50,12 +50,12 @@ public class CrabController : MonoBehaviour, IAIController {
 
     void OnDestroy()
     {
-        if (player != null) { player.GetComponent<PlayerMovement>().BreakFromCombat(); } 
+        if (player != null) { player.GetComponent<CombatController>().BreakFromCombat(); } 
     }
 
     public void OnDeath()
     {
-        player.GetComponent<PlayerMovement>().TakeFromEnemies(gameObject);
+        player.GetComponent<CombatController>().TakeFromEnemies(gameObject);
         Destroy(this.gameObject);
     }
 }

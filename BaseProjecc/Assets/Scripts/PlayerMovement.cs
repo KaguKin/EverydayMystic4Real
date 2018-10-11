@@ -22,15 +22,20 @@ public class PlayerMovement : MonoBehaviour
 
     public static bool canMove = true;
 
-    bool canAttack = true;
-
-    bool inCombat = false;
+    CombatController CC;
 
     Camera cam;
     float yVel;
 
     GameObject targetEnemy;
-    public List<GameObject> enemies;
+
+    bool canPlayLanding = false;
+
+    GameObject climbTarget;
+    GameObject climbMoveToTarget;
+    bool climbing;
+    bool movingTo = false;
+    
 
 	// Use this for initialization
 	void Start ()
@@ -39,36 +44,22 @@ public class PlayerMovement : MonoBehaviour
         myAnim = GetComponent<Animator>();
         cam = Camera.main;
         usedSpeed = speed;
+
+        CC = GetComponent<CombatController>();
 	}
 
-    public void AddToEnemies(GameObject newEnemy)
+  
+    public GameObject GetTargetEnemy()
     {
-        if(!enemies.Contains(newEnemy))
-        {
-            enemies.Add(newEnemy);
-        }
+        return targetEnemy;
     }
 
-    public void TakeFromEnemies(GameObject enemyToRemove)
-    {
-        if(enemies.Contains(enemyToRemove))
-        {
-            enemies.Remove(enemyToRemove);
-        }
-        
-    }
-
-    public void ToggleInCombat()
-    {
-        inCombat = !inCombat;
-    }
-
-    public void SetTarget(GameObject enemy)
+    public void SetTargetEnemy(GameObject enemy)
     {
         targetEnemy = enemy;
     }
 
-    public void SetSpeed(int newSpeed)
+    public void SetSpeed(float newSpeed)
     {
         usedSpeed = newSpeed;
     }
@@ -77,6 +68,16 @@ public class PlayerMovement : MonoBehaviour
     {
         usedSpeed = speed;
     }
+
+    public void FinishClimb()
+    {
+        climbing = false;
+    }
+
+    public void MovingTo()
+    {
+        movingTo = !movingTo;
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -84,6 +85,12 @@ public class PlayerMovement : MonoBehaviour
         if (!canMove)
         {
             return;
+        }
+
+        if(movingTo)
+        {
+            Vector3 newPos = Vector3.MoveTowards(transform.position, climbMoveToTarget.transform.position,  1.0f);
+            transform.position = newPos;
         }
 
         //move dir effected by camera direction.
@@ -99,10 +106,13 @@ public class PlayerMovement : MonoBehaviour
         {
             running = true;
 
-            if (target == null && inCombat) { inCombat = false; }
+            if (target == null && CC.InCombat()) { CC.SetInCombat(false); }
 
-            if (!inCombat) { target.transform.position = transform.position + moveDir; }
-            else { target.transform.position = targetEnemy.transform.position; }
+            if (!CC.InCombat()) { target.transform.position = transform.position + moveDir; }
+            else
+            {
+                if (target != null) { target.transform.position = targetEnemy.transform.position; }
+            }
         }
 
         myAnim.SetBool("run", running);
@@ -113,11 +123,22 @@ public class PlayerMovement : MonoBehaviour
         {
             //Should be in line with real world gravity - ish.
             yVel -= 9.8f * Time.deltaTime;
+            canPlayLanding = true;
+        }else
+        {
+            if (canPlayLanding) { myAnim.SetTrigger("land"); canPlayLanding = false; }
+            if (yVel < -0.09f) { yVel = -0.09f; }
         }
         //If the player presses space and the player is on the ground then jump
-        if (Input.GetKeyDown(KeyCode.Space) && charController.isGrounded){yVel = jumpPower;}
+        if (Input.GetKeyDown(KeyCode.Space) && charController.isGrounded)
+        {
+            yVel = jumpPower;
+            myAnim.Play("Jump_Start");
+            canPlayLanding = true;
+        }
 
         moveDir.y = yVel;
+        myAnim.SetFloat("yVel", yVel);
 
         charController.Move(moveDir * usedSpeed * Time.deltaTime);
 
@@ -129,69 +150,43 @@ public class PlayerMovement : MonoBehaviour
 
         transform.eulerAngles = new Vector3(rotX, transform.eulerAngles.y, rotZ);
 
-        
-        if(inCombat)
-        {
-
-            AnimatorClipInfo[] clipInfo = myAnim.GetCurrentAnimatorClipInfo(0);
-            //Check for a case to break away from being in combat state.
-            if (CheckForBreakFromCombat()) { BreakFromCombat(); }
-
-            if(Input.GetKeyDown(KeyCode.Mouse0) && canAttack)
-            {
-                myAnim.SetTrigger("attack");
-                canAttack = false;
-            }     
-        }
-        CheckForNewTarget();
-        
+        CheckForClimableWall();
 	}
 
-    public void ResetCanAttack()
-    {
-        canAttack = true;
-    }
 
-    bool CheckForBreakFromCombat()
+    void CheckForClimableWall()
     {
-        float dist = Vector3.Distance(transform.position, targetEnemy.transform.position);
-        if (dist > 10) { return true; }
-        else { return false; }
-    }
-
-    void CheckForNewTarget()
-    {
-        GameObject currTarget = null;
-        float minDist = 0;
-
-        if (enemies.Count <= 0)
+        RaycastHit hit;
+        if(Physics.Raycast(transform.position, transform.forward, out hit, 1.5f))
         {
-            inCombat = false;
-        }
-        else
-        {
-            inCombat = true;
-            for (int i = 0; i < enemies.Count; i++)
+            if (hit.transform.tag == "Climable")
             {
-                float dist = Vector3.Distance(transform.position, enemies[i].transform.position);
-                if (dist < minDist || minDist == 0)
+                if(Input.GetKeyDown(KeyCode.E))
                 {
-                    currTarget = enemies[i];
-                    minDist = dist;
+                    GameObject rightTarget = hit.transform.GetChild(0).gameObject;
+                    climbTarget = rightTarget;
+                    climbMoveToTarget = hit.transform.GetChild(1).gameObject;
+                    //myAnim.MatchTarget(rightTarget.transform.position, rightTarget.transform.rotation, AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 1f), 0.141f, 0.78f);
+                    myAnim.SetTrigger("climb");
+                    climbing = true;
+                    
                 }
             }
-            targetEnemy = currTarget;
         }
-
-        
     }
 
-    public void BreakFromCombat()
+    private void OnAnimatorIK()
     {
-        inCombat = false;
-
-        targetEnemy.GetComponent<CrabController>().ToggleCombat();
-        targetEnemy = null;
+        if(climbing)
+        {
+            if(climbTarget != null)
+            {
+                myAnim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+                myAnim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+                myAnim.SetIKPosition(AvatarIKGoal.RightHand, climbTarget.transform.position);
+                myAnim.SetIKRotation(AvatarIKGoal.RightHand, climbTarget.transform.rotation);
+            }
+        }
     }
 
     void CheckInput()
