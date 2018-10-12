@@ -89,7 +89,7 @@ public class PlayerMovement : MonoBehaviour
 
         if(movingTo)
         {
-            Vector3 newPos = Vector3.MoveTowards(transform.position, climbMoveToTarget.transform.position,  1.0f);
+            Vector3 newPos = Vector3.MoveTowards(transform.position, climbMoveToTarget.transform.position, 1f);
             transform.position = newPos;
         }
 
@@ -168,12 +168,14 @@ public class PlayerMovement : MonoBehaviour
                     climbMoveToTarget = hit.transform.GetChild(1).gameObject;
                     //myAnim.MatchTarget(rightTarget.transform.position, rightTarget.transform.rotation, AvatarTarget.RightHand, new MatchTargetWeightMask(Vector3.one, 1f), 0.141f, 0.78f);
                     myAnim.SetTrigger("climb");
-                    climbing = true;
+                    //HI MAX - PLACED 'climbing = true' IN OWN METHOD BELOW, ALLOWS US TO TIME THE POINT WHEN THE HAND SNAPS TO IN THE ANIMATOR EVENTS - KANE :)
+                    //climbing = true;
                     
                 }
             }
         }
     }
+
 
     private void OnAnimatorIK()
     {
@@ -187,6 +189,11 @@ public class PlayerMovement : MonoBehaviour
                 myAnim.SetIKRotation(AvatarIKGoal.RightHand, climbTarget.transform.rotation);
             }
         }
+    }
+
+    public void StartClimb()
+    {
+        climbing = true;
     }
 
     void CheckInput()
