@@ -35,6 +35,8 @@ public class PlayerMovement : MonoBehaviour
     GameObject climbMoveToTarget;
     bool climbing;
     bool movingTo = false;
+
+    bool canRotate = true;
     
 
 	// Use this for initialization
@@ -146,7 +148,8 @@ public class PlayerMovement : MonoBehaviour
         rotX = transform.eulerAngles.x;
         rotZ = transform.eulerAngles.z;
 
-        transform.LookAt(target.transform);
+        if (canRotate) { transform.LookAt(target.transform); }
+        
 
         transform.eulerAngles = new Vector3(rotX, transform.eulerAngles.y, rotZ);
 
@@ -189,6 +192,11 @@ public class PlayerMovement : MonoBehaviour
                 myAnim.SetIKRotation(AvatarIKGoal.RightHand, climbTarget.transform.rotation);
             }
         }
+    }
+
+    public void ToggleRotation()
+    {
+        canRotate = !canRotate;
     }
 
     public void StartClimb()
