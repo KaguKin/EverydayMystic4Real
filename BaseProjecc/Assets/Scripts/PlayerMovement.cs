@@ -69,6 +69,7 @@ public class PlayerMovement : MonoBehaviour
     public void ResetSpeed()
     {
         usedSpeed = speed;
+        moveDir.y = -0.1f;
     }
 
     public void FinishClimb()
@@ -108,7 +109,7 @@ public class PlayerMovement : MonoBehaviour
         {
             running = true;
 
-            if (target == null && CC.InCombat()) { CC.SetInCombat(false); }
+            if (targetEnemy == null && CC.InCombat()) { CC.SetInCombat(false); }
 
             if (!CC.InCombat()) { target.transform.position = transform.position + moveDir; }
             else
@@ -142,16 +143,16 @@ public class PlayerMovement : MonoBehaviour
         moveDir.y = yVel;
         myAnim.SetFloat("yVel", yVel);
 
+        if (canRotate) { transform.LookAt(target.transform); }
+        else { moveDir.y = -0.1f;}
+
+        transform.eulerAngles = new Vector3(rotX, transform.eulerAngles.y, rotZ);
+
         charController.Move(moveDir * usedSpeed * Time.deltaTime);
 
         //Look in direction the player has input based on the placement of the gameobject.
         rotX = transform.eulerAngles.x;
-        rotZ = transform.eulerAngles.z;
-
-        if (canRotate) { transform.LookAt(target.transform); }
-        
-
-        transform.eulerAngles = new Vector3(rotX, transform.eulerAngles.y, rotZ);
+        rotZ = transform.eulerAngles.z;     
 
         CheckForClimableWall();
 	}
@@ -173,12 +174,10 @@ public class PlayerMovement : MonoBehaviour
                     myAnim.SetTrigger("climb");
                     //HI MAX - PLACED 'climbing = true' IN OWN METHOD BELOW, ALLOWS US TO TIME THE POINT WHEN THE HAND SNAPS TO IN THE ANIMATOR EVENTS - KANE :)
                     //climbing = true;
-                    
                 }
             }
         }
     }
-
 
     private void OnAnimatorIK()
     {

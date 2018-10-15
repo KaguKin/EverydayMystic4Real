@@ -47542,8 +47542,22 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0
+    functionName: ToggleRotation
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.45833334
     functionName: StartClimb
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.4166666
+    functionName: ToggleRotation
     data: 
     objectReferenceParameter: {fileID: 0}
     floatParameter: 0
@@ -47570,7 +47584,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 1.6666666
+  - time: 1.5833334
     functionName: ResetSpeed
     data: 
     objectReferenceParameter: {fileID: 0}
